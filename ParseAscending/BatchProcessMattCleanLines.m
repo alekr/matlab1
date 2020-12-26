@@ -1,27 +1,18 @@
-FileList = dir('*.txt');
-N = size(FileList,1);
+% ***********************************************************************
+% Static values
+% ***********************************************************************
 
-for k = 1:N
+    % Directory to process
+    DIR_TO_PROCESS = '.';
+    % Input file search pattern
+    FILE_SEARCH_PATTERN = '*.txt';
+    % Extension for files once their line endings are cleaned
+    % (not used) FILE_EXT_CLEAN_LINE_ENDINGS = '.cleanBlanks';
+    
+% ***********************************************************************
+% Start the script ...
+% ***********************************************************************    
 
-   % get the file name:
-   filename = FileList(k).name;
-   disp(filename);
+numberOfProcessedFiles = batchProcessDir(DIR_TO_PROCESS,FILE_SEARCH_PATTERN);
 
-   [path, name, extension] = fileparts(filename);
-   
-    fout=strcat(path,name);
-    fout_name=strcat(fout,'.CleanBlanks');
-    fout=fopen(fout_name, 'w');
-   
-filecontent = fileread(filename);
-newcontent = regexprep(filecontent, {'\r', '\n\n+', '\n'}, {'', '\n', '\r\n'});
-% fout = fopen('new_pressure.txt', 'w');
-fwrite(fout, newcontent);
-fclose(fout);
-
-[path, name, extension] = fileparts(fout_name);
-   
- ParseFilesqMASS_asc(fout_name);
-   
-fclose('all');
-end
+disp(strcat(string(numberOfProcessedFiles),' processed file(s).'));

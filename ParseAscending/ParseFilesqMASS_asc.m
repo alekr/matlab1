@@ -1,4 +1,4 @@
-function ParseFilesqMASS_asc(filename);
+function ParseFilesqMASS_asc(filename)
 
 % open the file
 fid = fopen(filename, 'r');
